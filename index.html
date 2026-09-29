@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Вхід — Журнал автоматів</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+  body{font-family:Arial,sans-serif;text-align:center;padding-top:60px}
+  #g_id_signin{display:inline-block}
+</style>
+</head>
+<body>
+<h2>Увійдіть, щоб продовжити</h2>
+<div id="g_id_onload"
+     data-client_id="932395893529-fesqorj6u6ups632ffd7gin8e3hb9a7m.apps.googleusercontent.com"
+     data-callback="handleToken"
+     data-auto_prompt="false">
+</div>
+<div class="g_id_signin" data-type="standard"></div>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const panel = params.get('p') || '';
+  const APPS_SCRIPT_URL = 'ВСТАВТЕ_СЮДИ_URL_ВАШОГО_APPS_SCRIPT_ЗАКІНЧУЄТЬСЯ_НА_/exec';
+
+  function handleToken(response) {
+    document.body.innerHTML = '<p>Перевірка...</p>';
+    const target = APPS_SCRIPT_URL + '?p=' + encodeURIComponent(panel)
+                 + '&cred=' + encodeURIComponent(response.credential);
+    window.location.href = target;
+  }
+</script>
+</body>
+</html>
